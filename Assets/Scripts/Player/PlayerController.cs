@@ -17,7 +17,13 @@ public class PlayerController : MonoBehaviour
     bool jumpReleased;
     bool glideInput;
     bool canBeDamaged;
+    public bool GlideInput => glideInput;
+    [SerializeField] private ContactFilter2D ventFilter;
+
     
+    private List<Collider2D> colliders = new List<Collider2D>();
+    public int VentsCount { get; private set; } = 1;
+
 
     BoxCollider2D boxCollider2d;
     [SerializeField] private LayerMask groundLayerMask;
@@ -184,6 +190,12 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if (collider.gameObject.tag == "Vent")
+        {            
+            VentsCount = GetComponent<Collider2D>().OverlapCollider(ventFilter, colliders);            
+        }
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -241,8 +253,14 @@ public class PlayerController : MonoBehaviour
     {
         if (rigidbody2d.velocity.y <= -1f && glideInput)
         {
+
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y / glideScale);
         }
+        else
+        {
+           
+        }
+
     }
     private void Knockback(GameObject collision)
     {

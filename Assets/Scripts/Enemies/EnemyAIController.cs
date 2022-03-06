@@ -9,6 +9,7 @@ public class EnemyAIController : MonoBehaviour
     Vector2 movementInput;
     CharacterFacing2D enemyFacing;
     [Header("Movement")]
+    [SerializeField] private bool startWalkLeft;
     [Range(0.0f, 10.0f)]
     [SerializeField] float moveSpeed; 
     [Range(0.0f, 10.0f)]
@@ -35,14 +36,29 @@ public class EnemyAIController : MonoBehaviour
     {
         while (true)
         {
-            movementInput.x = 1;
-            yield return new WaitForSeconds(walkTime);
-            movementInput.x = 0;
-            yield return new WaitForSeconds(waitTime);
-            movementInput.x = -1;
-            yield return new WaitForSeconds(walkTime);
-            movementInput.x = 0;
-            yield return new WaitForSeconds(waitTime);
+            if (startWalkLeft)
+            {
+                movementInput.x = -1;
+                yield return new WaitForSeconds(walkTime);
+                movementInput.x = 0;
+                yield return new WaitForSeconds(waitTime);
+                movementInput.x = 1;
+                yield return new WaitForSeconds(walkTime);
+                movementInput.x = 0;
+                yield return new WaitForSeconds(waitTime);
+            }
+            else
+            {
+                movementInput.x = 1;
+                yield return new WaitForSeconds(walkTime);
+                movementInput.x = 0;
+                yield return new WaitForSeconds(waitTime);
+                movementInput.x = -1;
+                yield return new WaitForSeconds(walkTime);
+                movementInput.x = 0;
+                yield return new WaitForSeconds(waitTime);
+            }
+            
         }
         
 
