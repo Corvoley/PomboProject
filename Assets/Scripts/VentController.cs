@@ -10,11 +10,15 @@ public class VentController : MonoBehaviour
     
     
     private void OnTriggerStay2D(Collider2D collision)
-    {        
-        if (collision.gameObject.GetComponent<PlayerController>().GlideInput)
+    {
+        if (collision.CompareTag("Player"))
         {
-            //int numberTouchingPlayer = collision.OverlapCollider(ventLayer, colliders);
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (ventForce / collision.gameObject.GetComponent<PlayerController>().VentsCount), ForceMode2D.Impulse);
+            if (collision.gameObject.GetComponent<PlayerController>().GlideInput)
+            {
+                //int numberTouchingPlayer = collision.OverlapCollider(ventLayer, colliders);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (ventForce / collision.gameObject.GetComponent<PlayerController>().VentsCount), ForceMode2D.Impulse);
+            }
         }
+        
     }
 }
