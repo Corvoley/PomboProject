@@ -8,8 +8,15 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private CanvasGroup loadingOverlay;
     [SerializeField] private float fadeTime;
     public static SceneLoader Instance { get; private set; }
-    private void Awake()
+    private void Update()
     {
+        if (SceneManager.GetActiveScene().name == "LastStage")
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void Awake()
+    {        
         if (Instance == null)
         {
             Instance = this;
@@ -17,6 +24,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
+            
             Destroy(gameObject);
         }
     }

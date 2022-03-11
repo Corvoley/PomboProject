@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverImage;
-    private PlayerController player;
+    [SerializeField] private GameObject pauseOverlay;
+    [SerializeField] private PlayerController player;
     [SerializeField] private float gameTimerCountdown;
     [SerializeField] private Text timeCounter;
     private void Start()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
-        
+
+
+
     }
     private void Update()
     {
@@ -33,7 +36,6 @@ public class GameHandler : MonoBehaviour
         player.enabled = true;
     }
 
-
     private void GameTimeCounter()
     {
         if (gameTimerCountdown <= 0)
@@ -44,4 +46,18 @@ public class GameHandler : MonoBehaviour
         timeCounter.text = Mathf.Round(gameTimerCountdown).ToString();       
     }
 
+    public void PauseGame() 
+    {
+        pauseOverlay.SetActive(true);
+        Time.timeScale = 0;
+        player.enabled = false;
+        
+    }
+    public void ResumeGame()
+    {
+        pauseOverlay.SetActive(false);
+        Time.timeScale = 1;
+        player.enabled = true;
+        
+    }
 }
