@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private float gameTimerCountdown;
     [SerializeField] private Text timeCounter;
+    private bool isPaused = false;
     private void Start()
     {
         player = GameObject.FindObjectOfType<PlayerController>();
@@ -19,8 +20,25 @@ public class GameHandler : MonoBehaviour
     }
     private void Update()
     {
+        PauseHendler();
         GameTimeCounter();
     }
+
+    private void PauseHendler()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            if (!isPaused)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
+    }
+
     public void EndGame()
     {
         Time.timeScale = 0;
@@ -51,13 +69,16 @@ public class GameHandler : MonoBehaviour
         pauseOverlay.SetActive(true);
         Time.timeScale = 0;
         player.enabled = false;
-        
+        isPaused = true;
+
+
     }
     public void ResumeGame()
     {
         pauseOverlay.SetActive(false);
         Time.timeScale = 1;
         player.enabled = true;
+        isPaused = false;
         
     }
 }

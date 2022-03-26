@@ -148,7 +148,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("Collectable_Small"))
         {
-            Destroy(collision.gameObject);
+
+            collision.GetComponent<Collectable>().OnPickup();
             breadCrumbsCount += 1;
             PlayerPrefs.SetInt("BreadCount", breadCrumbsCount);
             
