@@ -29507,10 +29507,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1954265026}
     - target: {fileID: 4041853321122833939, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4041853321122833939, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.11001873
       objectReference: {fileID: 0}
@@ -29553,30 +29549,6 @@ PrefabInstance:
     - target: {fileID: 4041853321122834159, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029530769819521, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029530769819521, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029532141153368, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029532141153368, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.y
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029532429709304, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377029532429709304, guid: 742a86b6e6afd694ebdf98a12da15a46, type: 3}
-      propertyPath: parallaxEffectMultiplier.y
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
