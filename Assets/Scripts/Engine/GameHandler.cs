@@ -11,11 +11,12 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private float gameTimerCountdown;
     [SerializeField] private Text timeCounter;
     private bool isPaused = false;
+
+    [SerializeField] private MusicPlayer musicPlayer;
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
-
-
+        player = FindFirstObjectByType<PlayerController>();
+        musicPlayer.PlayMainTrackMusic();
 
     }
     private void Update()

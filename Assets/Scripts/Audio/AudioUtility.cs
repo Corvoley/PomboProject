@@ -26,7 +26,7 @@ public class AudioUtility : MonoBehaviour
         else
         {
             source.clip = clip;
-            source.loop = false;
+            source.loop = true;
             source.Play();
         }
 

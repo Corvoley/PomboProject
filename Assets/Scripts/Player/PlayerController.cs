@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     GameHandler gameHandler;
     Animator animations;
     CharacterFacing2D playerFacing;
+    UiAudioController uiAudioController;
     Vector2 movementInput;
     bool canMove = true;
     bool jumpInput;
@@ -87,7 +88,8 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
-        gameHandler = GameObject.FindObjectOfType<GameHandler>();
+        gameHandler = FindFirstObjectByType<GameHandler>();
+        uiAudioController = FindFirstObjectByType<UiAudioController>();
         animations = GetComponent<Animator>();
         playerFacing = GetComponent<CharacterFacing2D>();
         breadCrumbsCount = PlayerPrefs.GetInt("BreadCount");
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
         bool isFacingRight = playerFacing.IsFacingRight();
         float targetOffSetX = isFacingRight ? cameraTargetOffsetX : -cameraTargetOffsetX;
         float currentOffsetX = Mathf.Lerp(cameraTarget.localPosition.x, targetOffSetX, cameraTargetFlipSpeed * Time.fixedDeltaTime);
-        currentOffsetX += rigidbody2d.velocity.x * characterSpeedInfluence * Time.fixedDeltaTime;
+        currentOffsetX += rigidbody2d.linearVelocity.x * characterSpeedInfluence * Time.fixedDeltaTime;
         cameraTarget.localPosition = new Vector3(currentOffsetX, cameraTarget.localPosition.y, cameraTarget.localPosition.z);
     }
 
@@ -139,7 +141,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Collectable_Big"))
         {
-            Destroy(collision.gameObject);
+            uiAudioController.PlayBreadSound();
+            collision.GetComponent<Collectable>().OnPickup();
             breadCount += 1;
             score += 5000;
             PlayerPrefs.SetInt("Score", score);
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.CompareTag("Collectable_Small"))
         {
-
+            uiAudioController.PlayCoinSound();
             collision.GetComponent<Collectable>().OnPickup();
             breadCrumbsCount += 1;
             PlayerPrefs.SetInt("BreadCount", breadCrumbsCount);
@@ -166,6 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!IsGrounded())
             {
+                uiAudioController.PlayEnemyKillSound();
                 Destroy(collision.gameObject);
                 JumpKillKnockback();
                 score += 1000;
@@ -180,7 +184,7 @@ public class PlayerController : MonoBehaviour
         {
             if (health > 0 && canBeDamaged)
             {
-
+                uiAudioController.PlayEnemyHitSound();
                 DoDamage();
                 Knockback(collider.gameObject);
                 invunerabilityTimeRemaining = invunerabilityTime;
@@ -194,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
         if (collider.gameObject.tag == "Vent")
         {            
-            VentsCount = GetComponent<Collider2D>().OverlapCollider(ventFilter, colliders);            
+            VentsCount = GetComponent<Collider2D>().Overlap(ventFilter, colliders);            
         }
         
     }
@@ -205,7 +209,7 @@ public class PlayerController : MonoBehaviour
         {
             if (health > 0 && canBeDamaged)
             {
-
+                uiAudioController.PlayEnemyHitSound();
                 DoDamage();
                 Knockback(collision.gameObject);
                 invunerabilityTimeRemaining = invunerabilityTime;
@@ -222,7 +226,7 @@ public class PlayerController : MonoBehaviour
     private void Movement(Vector2 movementInput, float moveSpeed)
     {
         float speed = movementInput.x * moveSpeed;
-        rigidbody2d.velocity = new Vector2(speed, rigidbody2d.velocity.y);
+        rigidbody2d.linearVelocity = new Vector2(speed, rigidbody2d.linearVelocity.y);
     }
     private void Jump(float jumpForce)
     {
@@ -241,21 +245,21 @@ public class PlayerController : MonoBehaviour
         {
             fGroundedRemember = 0;
             fJumpPressedRemember = 0;
-            rigidbody2d.velocity = Vector2.up * jumpForce;
+            rigidbody2d.linearVelocity = Vector2.up * jumpForce;
         }
-        if (jumpReleased && rigidbody2d.velocity.y > 0)
+        if (jumpReleased && rigidbody2d.linearVelocity.y > 0)
         {
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y * 0.5f);
+            rigidbody2d.linearVelocity = new Vector2(rigidbody2d.linearVelocity.x, rigidbody2d.linearVelocity.y * 0.5f);
         }
 
 
     }
     private void Glide(float glideScale)
     {
-        if (rigidbody2d.velocity.y <= -1f && glideInput)
+        if (rigidbody2d.linearVelocity.y <= -1f && glideInput)
         {
 
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y / glideScale);
+            rigidbody2d.linearVelocity = new Vector2(rigidbody2d.linearVelocity.x, rigidbody2d.linearVelocity.y / glideScale);
         }
         else
         {
@@ -272,7 +276,7 @@ public class PlayerController : MonoBehaviour
 
             canMove = false;
 
-            rigidbody2d.velocity = new Vector2(-knockbackDistance, knockbackHeight);
+            rigidbody2d.linearVelocity = new Vector2(-knockbackDistance, knockbackHeight);
             knockbackTimeRemaining = knockbackTime;
 
 
@@ -281,13 +285,13 @@ public class PlayerController : MonoBehaviour
         {
             //enemy is to my right therefore i should be damaged and move right
             canMove = false;
-            rigidbody2d.velocity = new Vector2(knockbackDistance, knockbackHeight);
+            rigidbody2d.linearVelocity = new Vector2(knockbackDistance, knockbackHeight);
             knockbackTimeRemaining = knockbackTime;
         }
     }
     private void JumpKillKnockback()
     {
-        rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpKillKnockbackHeight);
+        rigidbody2d.linearVelocity = new Vector2(rigidbody2d.linearVelocity.x, jumpKillKnockbackHeight);
     }
     private void KnockbackCounter()
     {

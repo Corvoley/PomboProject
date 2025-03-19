@@ -67,6 +67,6 @@ public class EnemyAIController : MonoBehaviour
     private void Movement(Vector2 movementInput, float moveSpeed)
     {
         float speed = movementInput.x * moveSpeed;
-        rigidbody2d.velocity = new Vector2(speed, rigidbody2d.velocity.y);
+        rigidbody2d.linearVelocity = new Vector2(speed, rigidbody2d.linearVelocity.y);
     }
 }

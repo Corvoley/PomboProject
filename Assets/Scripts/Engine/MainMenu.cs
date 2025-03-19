@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private int health;
     [SerializeField] private Text finalScoreText;
+    [SerializeField] private MusicPlayer musicPlayer;
 
     private void Awake()
     {
@@ -19,6 +20,10 @@ public class MainMenu : MonoBehaviour
             finalScoreText.text = $"Final Score:\n{PlayerPrefs.GetInt("Score").ToString()}";
         }
         
+    }
+    private void Start()
+    {
+        musicPlayer.PlayStartMenuMusic();
     }
     public void StartGame()
     {

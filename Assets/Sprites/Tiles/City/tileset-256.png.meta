@@ -105,7 +105,7 @@ TextureImporter:
       213: -6224914817927614135
     second: tileset-256_65
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -126,6 +126,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -134,9 +135,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -164,6 +165,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -203,6 +205,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -940,6 +954,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tileset-256_24: 3453503876491795390
+      tileset-256_42: -6850881786952239174
+      tileset-256_57: -4616100453576891454
+      tileset-256_3: 733639494669513728
+      tileset-256_4: -7323187507751406404
+      tileset-256_26: -2178127368993726382
+      tileset-256_58: 7428406091201168541
+      tileset-256_61: 1138625871435058626
+      tileset-256_28: 393175597224226203
+      tileset-256_65: -6224914817927614135
+      tileset-256_32: -2433604944988372612
+      tileset-256_36: -1072114251567897631
+      tileset-256_43: 7473048202888210968
+      tileset-256_17: 7591828916593300583
+      tileset-256_29: -3098162918375618104
+      tileset-256_31: -3923328442588799632
+      tileset-256_38: -1043679537774755659
+      tileset-256_9: 8953429908657247586
+      tileset-256_27: -9095438713590067010
+      tileset-256_64: 70618926304005305
+      tileset-256_2: -2741406340480428047
+      tileset-256_33: -4309523830132975248
+      tileset-256_56: 8614086305350170885
+      tileset-256_60: -5865106468604095098
+      tileset-256_30: 8971496521136771237
+      tileset-256_34: 2683753593249649531
+      tileset-256_12: -6387002121510498790
+      tileset-256_18: 2921654676595138318
+      tileset-256_19: 7629031704765538899
+      tileset-256_45: 3627977776661526115
+      tileset-256_15: 275057333344470139
+      tileset-256_39: -1153508067142320064
+      tileset-256_14: -8160687586196402278
+      tileset-256_16: 8841849973681575314
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

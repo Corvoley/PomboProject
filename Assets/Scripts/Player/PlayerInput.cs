@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField]
+    private KeyCode key; 
     public Vector2 GetMovementInput()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -16,7 +18,7 @@ public class PlayerInput : MonoBehaviour
     }
     public bool IsJumpButtonHeld()
     {
-        return Input.GetKey(KeyCode.Space);
+        return Input.GetKey(KeyCode.W);
     }
     public bool IsJumpButtonUp()
     {
